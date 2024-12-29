@@ -25,7 +25,7 @@ def publish_data():
                 with open("battery_data.json", 'r') as file:
                     data = json.load(file)
                     payload = data.get("Battery",{})
-                    client.publish(topic, json.dumps(payload), retain=True)
+                    client.publish(topic, json.dumps(payload), retain=False)
                     print(f"Published to {topic}")
             except Exception as e:
                 print(f"Error reading or publishing data: {e}")
