@@ -62,8 +62,8 @@ def main():
     print("Starting file reader...")
     manager.run_file_reader()
     # Start publisher
-    print("Starting publisher...")
-    manager.run_publisher()
+    '''print("Starting publisher...")
+    manager.run_publisher()'''
 
     print("\nSystem is running. Press Ctrl+C to shutdown.")
     
