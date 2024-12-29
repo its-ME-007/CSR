@@ -9,10 +9,10 @@ class ProcessManager:
     def __init__(self):
         self.publisher_process = None
 
-    def run_publisher(self):
+    '''def run_publisher(self):
         """Run the MQTT publisher."""
         self.publisher_process = subprocess.Popen(['python', 'publisher.py'])
-        return self.publisher_process
+        return self.publisher_process'''
 
     def run_addn_data(self):
         """Run the additional data script."""
@@ -56,8 +56,8 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
 
     # Start publisher
-    print("Starting publisher...")
-    manager.run_publisher()
+    '''print("Starting publisher...")
+    manager.run_publisher()'''
 
     print("\nSystem is running. Press Ctrl+C to shutdown.")
     
