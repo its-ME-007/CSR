@@ -14,10 +14,10 @@ class ProcessManager:
         self.publisher_process = subprocess.Popen(['python', 'publisher.py'])
         return self.publisher_process
     
-    def run_file_reader(self):
+    '''def run_file_reader(self):
         """Run the file reader."""
         self.file_reader_process = subprocess.Popen(['python', 'file_reader.py'])
-        return self.file_reader_process
+        return self.file_reader_process'''
     
     def run_addn_data(self):
         """Run the additional data script."""
@@ -60,10 +60,10 @@ def main():
 
     signal.signal(signal.SIGINT, signal_handler)
     print("Starting file reader...")
-    manager.run_file_reader()
+   # manager.run_file_reader()
     # Start publisher
-    '''print("Starting publisher...")
-    manager.run_publisher()'''
+    print("Starting publisher...")
+    manager.run_publisher()
 
     print("\nSystem is running. Press Ctrl+C to shutdown.")
     

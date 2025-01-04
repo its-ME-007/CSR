@@ -1,11 +1,14 @@
+from flask import Blueprint
 import json
 import time
 import random
 from datetime import datetime
 
+# Create a blueprint for modify_battery_data
+modify_battery_data_bp = Blueprint('modify_battery_data', __name__)
+
 STATUS_FILE_PATH = 'battery_data.json'
 
-# Sample battery data
 battery_data = {
     "Battery": {
         "Voltage_1": 4.07,
@@ -31,11 +34,11 @@ battery_data = {
         "Voltage_21": 2.5,
         "Voltage_22": 2.5,
         "Voltage_23": 2.5,
-        "Voltage_24": 2.5,  # Initialize with 24 cells 
+        "Voltage_24": 2.5,
         "Current": 4.3,
         "SOC": 85,
         "NumberOfCells": 24,
-        "CellVoltage": 50.4,  # Example total voltage for 24 cells
+        "CellVoltage": 50.4,
         "ChargingMOSFET": "ON",
         "DischargingMOSFET": "ON",
         "CellMinimumVoltage": 2.1,
@@ -47,7 +50,7 @@ battery_data = {
     "AdditionalInfo": {
         "DistanceTravelled": 0,
         "Runtime": 0,
-        "RangeLeft": 10000,  # Assuming a starting range
+        "RangeLeft": 10000,
         "Date": ""
     }
 }
@@ -57,35 +60,28 @@ def save_battery_status():
     with open(STATUS_FILE_PATH, 'w') as file:
         json.dump(battery_data, file, indent=4)
 
+@modify_battery_data_bp.route('/publish', methods=['POST'])
 def publish_battery_data():
     while True:
-        # Simulate real-time updates to battery status
-        # Randomly vary the voltage of one of the cells
-        battery_data["Battery"]["Voltage_7"] = round(random.uniform(2.0, 4.2), 2)  # Fixed indexing
+        battery_data["Battery"]["Voltage_7"] = round(random.uniform(2.0, 4.2), 2) 
         
-        # Update other battery attributes randomly
-        battery_data["Battery"]["Current"] = random.uniform(0, 10)  # Random current between 0 and 10
-        battery_data["Battery"]["SOC"] = random.randint(20, 100)  # Random SOC between 20 and 100
-        battery_data["Battery"]["CellVoltage"] = sum(battery_data["Battery"][f"Voltage_{i}"] for i in range(1, 25))  # Update total cell voltage
+        battery_data["Battery"]["Current"] = random.uniform(0, 10)  
+        battery_data["Battery"]["SOC"] = random.randint(20, 100) 
+        battery_data["Battery"]["CellVoltage"] = sum(battery_data["Battery"][f"Voltage_{i}"] for i in range(1, 25))  
         
-        # Update minimum and maximum voltage based on the current voltage list
-        battery_data["Battery"]["CellMinimumVoltage"] = min(battery_data["Battery"][f"Voltage_{i}"] for i in range(1, 25))  # Fixed calculation
-        battery_data["Battery"]["CellMaximumVoltage"] = max(battery_data["Battery"][f"Voltage_{i}"] for i in range(1, 25))  # Fixed calculation
+        battery_data["Battery"]["CellMinimumVoltage"] = min(battery_data["Battery"][f"Voltage_{i}"] for i in range(1, 25))
+        battery_data["Battery"]["CellMaximumVoltage"] = max(battery_data["Battery"][f"Voltage_{i}"] for i in range(1, 25))
 
-        # Update additional info values
-        battery_data["AdditionalInfo"]["DistanceTravelled"] += random.uniform(0.1, 1.0)  # Increase distance travelled randomly
-        battery_data["AdditionalInfo"]["Runtime"] += 1  # Increase runtime linearly
-        battery_data["AdditionalInfo"]["RangeLeft"] -= random.uniform(0.1, 0.5)  # Decrease range left randomly
+        battery_data["AdditionalInfo"]["DistanceTravelled"] += random.uniform(0.1, 1.0)
+        battery_data["AdditionalInfo"]["Runtime"] += 1
+        battery_data["AdditionalInfo"]["RangeLeft"] -= random.uniform(0.1, 0.5)
 
-        # Ensure range_left does not go below zero
         battery_data["AdditionalInfo"]["RangeLeft"] = max(battery_data["AdditionalInfo"]["RangeLeft"], 0)
 
-        # Update the date to the current date
-        battery_data["AdditionalInfo"]["Date"] = datetime.now().strftime("%Y-%m-%d")  # Set current date
+        battery_data["AdditionalInfo"]["Date"] = datetime.now().strftime("%Y-%m-%d")
+        save_battery_status()
 
-        save_battery_status()  # Save to the JSON file
-
-        time.sleep(0.7)  # Publish interval, can be modified as per our requirement
+        time.sleep(0.7)
 
 if __name__ == "__main__":
     publish_battery_data()
