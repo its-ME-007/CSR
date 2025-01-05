@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Application{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/login">Login</a> |
+            <a href="/register">Register</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Block for Child Template Content -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; {{ year }} My Application. All rights reserved.</p>
+    </footer>
+</body>
+</html>

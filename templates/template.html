@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .data-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Socket.IO Network Test</h1>
+    <div class="data-container">
+        <h3>Battery Updates:</h3>
+        <ul id="battery-updates">
+            <!-- Real-time updates will appear here -->
+        </ul>
+    </div>
+
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io("http://127.0.0.1:5000");
+
+        // Function to add data to the update list
+        function addUpdate(message, isError = false) {
+            const updatesList = document.getElementById('battery-updates');
+            const listItem = document.createElement('li');
+            listItem.textContent = message;
+            if (isError) {
+                listItem.classList.add('error');
+            }
+            updatesList.appendChild(listItem);
+        }
+
+        // Listen for updates for each key
+        socket.on('voltage_1', (data) => {
+            addUpdate(`Voltage_1: ${data.Voltage_1}`);
+        });
+
+        socket.on('current', (data) => {
+            addUpdate(`Current: ${data.Current}`);
+        });
+
+        socket.on('soc', (data) => {
+            addUpdate(`SOC: ${data.SOC}`);
+        });
+
+        socket.on('cell_minimum_voltage', (data) => {
+            addUpdate(`Cell Minimum Voltage: ${data.CellMinimumVoltage}`);
+        });
+
+        socket.on('cell_maximum_voltage', (data) => {
+            addUpdate(`Cell Maximum Voltage: ${data.CellMaximumVoltage}`);
+        });
+
+        // Listen for errors
+        socket.on('error', (data) => {
+            const key = Object.keys(data)[0];
+            addUpdate(`${key}: ${data[key]}`, true);
+        });
+
+        socket.on('connect', () => {
+            addUpdate("Connected to the Socket.IO server.");
+        });
+
+        socket.on('disconnect', () => {
+            addUpdate("Disconnected from the Socket.IO server.", true);
+        });
+    </script>
+</body>
+</html>

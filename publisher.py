@@ -1,10 +1,13 @@
 import paho.mqtt.client as mqtt
 import json
 import time
+from flask import Blueprint
 
 broker = "localhost"
 port = 1883
 topic = "battery_data"
+
+publisher = Blueprint("publisher",__name__)
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -30,7 +33,8 @@ def publish_data():
             except Exception as e:
                 print(f"Error reading or publishing data: {e}")
                 
-            time.sleep(3)  # Adjusted for 5 minutes
+            time.sleep(3) 
+             # Adjusted for 5 minutes
     except Exception as e:
         print(f"Connection error: {e}")
     finally:
