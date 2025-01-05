@@ -11,20 +11,15 @@ Ensure you have the following installed on your system:
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/its-ME-007/DTL/
    ```
 
-2. Navigate to the project directory:
-   ```bash
-   cd <project-folder>
-   ```
-
-3. Checkout the `main` branch:
+2. Checkout the `main` branch:
    ```bash
    git checkout main
    ```
 
-4. Install dependencies:
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
