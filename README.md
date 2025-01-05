@@ -3,6 +3,11 @@
 ## Overview
 The DTL project for the year 2024-25 is designed to streamline various functionalities, including website login and core operations. This README is for the **main** branch, which includes the website login feature in addition to the functionalities available in the **functional** branch.
 
+## Prerequisites
+Ensure you have the following installed on your system:
+- Python 3.8 or higher
+- Required dependencies (listed in `requirements.txt`)
+
 ## Setup Instructions
 1. Clone the repository:
    ```bash
@@ -19,13 +24,12 @@ The DTL project for the year 2024-25 is designed to streamline various functiona
    git checkout main
    ```
 
-## How to Run
-Each script is a standalone Python file. You can run any script using the following command:
-```bash
-python <filename>.py
-```
-Replace `<filename>` with the name of the script you want to execute.
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+---
 ### Note
 The **main** branch includes the login feature integrated into the website, which is absent in the **functional** branch. For functionalities excluding login, refer to the **functional** branch.
 
@@ -57,6 +61,6 @@ The **main** branch includes the login feature integrated into the website, whic
 
 ## Support
 For any issues or queries, please contact the project maintainers or create an issue in the repository.
-
-
+---
+#### Created by - Anirudh R Kulkarni
 
