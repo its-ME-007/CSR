@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+    <link rel="stylesheet" href="static/app.css">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .authorization {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 296px;
+            height: 478px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .authorization input[type="text"],
+        .authorization input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .button_logreg {
+            width: 100%;
+            padding: 10px;
+            background-color: #C72A0B;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Manrope';
+        }
+
+        .button_logreg:hover {
+            background-color: #C72A0B;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #e74c3c;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container1 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .welcome {
+            display: flex;
+            justify-content: center;
+            color: black;
+            font-weight: 400;
+            margin-bottom: 50px;
+            font-family: 'Manrope';
+        }
+
+        .forgot {
+            color: black;
+            font-family: 'Manrope';
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <p class="welcome"><b>Welcome Back,</b></p>
+        <div class="authorization">
+            <form action="/login" method="POST">
+                <input type="text" name="vehicle_number" required placeholder="Enter your vehicle number">
+                <br />
+                <input type="password" name="password" required placeholder="Enter password">
+                <br />
+                <input type="submit" value="Login" class="button_logreg">
+            </form>
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>
