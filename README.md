@@ -58,6 +58,5 @@ The **main** branch includes the login feature integrated into the website, whic
 ## Support
 For any issues or queries, please contact the project maintainers or create an issue in the repository.
 
-## License
-This project is licensed under [Insert License Here].
+
 
